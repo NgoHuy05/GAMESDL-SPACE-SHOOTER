@@ -3,7 +3,7 @@ bool initializeSDL() {
         std::cerr << "SDL_Init failed: " << SDL_GetError() << std::endl;
         return false;
     }
-
+ 
     if (TTF_Init() != 0) {
         std::cerr << "TTF_Init failed: " << TTF_GetError() << std::endl;
         SDL_Quit();

@@ -1,11 +1,5 @@
 bin/ 
 obj/ 
 *.o 
-bin/ 
-obj/ 
-*.o 
 *.exe 
-bin/ 
-obj/ 
-*.o 
-*.exe 
+

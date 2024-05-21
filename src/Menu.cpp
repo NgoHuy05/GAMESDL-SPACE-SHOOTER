@@ -9,7 +9,7 @@ void countdown(SDL_Renderer* renderer, TTF_Font* font) {
         renderText(renderer, font, countdownText, 500, 250);
         SDL_RenderPresent(renderer);
         SDL_Delay(1000);
-        countdown--;
+        countdown--; 
     }
         Mix_PlayChannel(-1, tingSound, 0);
 }

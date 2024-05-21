@@ -3,7 +3,6 @@ private:
     int x;
     int y;
     int speed;
-
 public:
     Enemy(int initialX, int initialY, int initialSpeed)
         : x(initialX), y(initialY), speed(1.5) {}
@@ -11,11 +10,9 @@ public:
     void move() {
         x -= speed;
     }
-
     int getX() const {
         return x;
     }
-
     int getY() const {
         return y;
     }

@@ -1,7 +1,24 @@
 # Space-shooter
 Welcome to Space-shooter, a thrilling arcade-style game where you pilot a spaceship and battle against waves of enemies in space. This game is developed entirely in C++ utilizing the powerful SDL2 library, providing rich graphics and immersive sound effects.
 
+# Gallery
+
 ![image](https://github.com/NgoHuy05/Space-shooter---gameSDL/assets/160807769/2841febd-90c9-4a9d-836f-40f68be95505)
 ![image](https://github.com/NgoHuy05/Space-shooter---gameSDL/assets/160807769/cc087d70-f9ee-4909-805c-b50ee5e2adfd)
 
+# Controls
+- Use the Up/Down/Left/Right arrow keys to maneuver the character.
+- Press SPACE to unleash a barrage of bullets and thwart enemy attacks.
+- Click with the MOUSE to navigate through the menu and access game options.
 
+# Features
+- Object Integration: Implement core game objects including Character, Enemies, and Bullets.
+Enemy Dynamics: Enemies dynamically move against the character and spawn randomly for added challenge.
+- Visual Enhancements: Incorporate visually appealing assets such as background scenery, menu screens (start and game over), character sprites, enemy designs, and bullet animations.
+- Audio Ambiance: Enhance gameplay with immersive sound effects that heighten the intensity of battles and interactions.
+- Font Styling: Utilize custom fonts to enrich the visual presentation and enhance readability.
+
+# License : The source code for this project is licensed under the MIT license, granting users the freedom to use, modify, and distribute the code for both commercial and non-commercial purposes. See the LICENSE file for more details.
+
+# Acknowledgements
+- [Lazy Foo's SDL tutorials](https://lazyfoo.net/tutorials/SDL/index.php) have been incredibly valuable, especially if you're delving into low-level game programming or seeking a robust framework to manage fundamental graphics for your C/C++ projects.

@@ -12,7 +12,7 @@ private:
 public:
     Character(int initialX, int initialY, int initialSpeed, int screenW, int screenH)
         : x(initialX), y(initialY), speed(initialSpeed), screenWidth(screenW), screenHeight(screenH), score(0), bestScore(0), HP(3){}
-
+ 
     void moveUp() { y -= speed; }
     void moveDown() { y += speed; }
     void moveLeft() { x -= speed; }

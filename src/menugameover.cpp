@@ -5,7 +5,7 @@ void resetGame(Character& player, std::vector<Enemy>& enemies) {
     player.setHP(3);
     enemies.clear();
 }
-
+ 
 bool showMenuOver(SDL_Renderer* renderer, TTF_Font* font,  Character& player) {
         SDL_Surface* background2Surface = IMG_Load("image/background2.png");
         SDL_Texture* background2Texture = SDL_CreateTextureFromSurface(renderer, background2Surface);

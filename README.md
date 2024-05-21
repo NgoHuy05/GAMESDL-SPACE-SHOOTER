@@ -21,9 +21,7 @@ Enemy Dynamics: Enemies dynamically move against the character and spawn randoml
 # Third party tools :
 - [SDL2-devel-2.29.2-mingw.zip](https://github.com/libsdlorg/SDL/releases/tag/prerelease-2.29.2) to handle all the low-level stuff
 - [SDL2_image-devel-2.8.2-mingw.zip](https://github.com/libsdlorg/SDL_image/releases/tag/release-2.8.2) for loading images
-
 -[SDL2_mixer-devel-2.8.0-mingw.zip](https://github.com/libsdlorg/SDL_image/releases/tag/release-2.8.2) for loading sounds
-
 -[SDL2_ttf-devel-2.22.0-mingw.zip](https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.22.0) for loading fonts
 
 # Acknowledgements :

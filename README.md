@@ -5,6 +5,7 @@ Welcome to Space-shooter, a thrilling arcade-style game where you pilot a spaces
 
 ![image](https://github.com/NgoHuy05/Space-shooter---gameSDL/assets/160807769/2841febd-90c9-4a9d-836f-40f68be95505)
 ![image](https://github.com/NgoHuy05/Space-shooter---gameSDL/assets/160807769/cc087d70-f9ee-4909-805c-b50ee5e2adfd)
+![image](https://github.com/NgoHuy05/GAMESDL-SPACE-SHOOTER/assets/160807769/25269135-3088-4d47-81f1-8c12271f9349)
 
 # Controls :
 - Use the Up/Down/Left/Right arrow keys to maneuver the character.

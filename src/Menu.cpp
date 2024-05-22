@@ -9,7 +9,7 @@ void countdown(SDL_Renderer* renderer, TTF_Font* font) {
         renderText(renderer, font, countdownText, 500, 250);
         SDL_RenderPresent(renderer);
         SDL_Delay(1000);
-        countdown--; 
+        countdown--;
     }
         Mix_PlayChannel(-1, tingSound, 0);
 }
@@ -95,9 +95,14 @@ bool showMenu(SDL_Renderer* renderer, TTF_Font* font) {
             SDL_RenderCopy(renderer, exitTexture, NULL, &exitRect);
             renderText(renderer, font, "Flying up    : UP", 100, 100);
             renderText(renderer, font, "Flying down  : DOWN", 100, 150);
-            renderText(renderer, font, "Flying left  : LEFT", 100, 200);
-            renderText(renderer, font, "Flying right : RIGHT", 100, 250);
-            renderText(renderer, font, "SHOOT: SPACE", 100, 300);
+            renderText(renderer, font, "Flying left  : LEFT", 500, 100);
+            renderText(renderer, font, "Flying right : RIGHT", 500, 150);
+            renderText(renderer, font, "SHOOT: SPACE", 100, 200);
+            renderText(renderer, font, "If you let the enemy cross the boundary, you will lose 1 HP", 100, 400);
+            renderText(renderer, font, "If you collide with the enemy, you will lose 1 HP", 100, 450);
+            renderText(renderer, font, "If you run out of HP, you will lose", 100, 500);
+             renderText(renderer, font, "Tip: Try to eliminate all enemies, don't let any of them pass, and avoid colliding with the enemies", 100, 350);
+
             SDL_RenderPresent(renderer);
 
         }

@@ -1,3 +1,8 @@
+# Introductin :
+Full Name : Ngo Duc Huy
+ID: 23020610
+K68N - UET - 2324II_INT2215_21 - Lap trinh nang cao
+
 # Space-shooter
 Welcome to Space-shooter, a thrilling arcade-style game where you pilot a spaceship and battle against waves of enemies in space. This game is developed entirely in C++ utilizing the powerful SDL2 library, providing rich graphics and immersive sound effects.
 

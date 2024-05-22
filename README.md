@@ -1,6 +1,8 @@
 # Introductin :
 Full Name : Ngo Duc Huy
+
 ID: 23020610
+
 K68N - UET - 2324II_INT2215_21 - Lap trinh nang cao
 
 # Space-shooter

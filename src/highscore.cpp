@@ -1,6 +1,5 @@
 #include <fstream>
 
-
 int readHighScore(const std::string& filename) {
     std::ifstream file(filename);
     int highScore = 0;

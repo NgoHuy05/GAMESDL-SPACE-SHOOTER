@@ -5,7 +5,7 @@ void resetGame(Character& player, std::vector<Enemy>& enemies) {
     player.setHP(3);
     enemies.clear();
 }
- 
+
 bool showMenuOver(SDL_Renderer* renderer, TTF_Font* font,  Character& player) {
         SDL_Surface* background2Surface = IMG_Load("image/background2.png");
         SDL_Texture* background2Texture = SDL_CreateTextureFromSurface(renderer, background2Surface);
@@ -60,9 +60,14 @@ bool showMenuOver(SDL_Renderer* renderer, TTF_Font* font,  Character& player) {
             player.updateBestScore();
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer, background2Texture, NULL, NULL);
+            if(player.getScore() >= 13122005){
+                std::string scoreText = "CONGRATULATION !!! YOU WIN.";
+                renderText(renderer, font, scoreText, 330, 80);
+            }else{
             SDL_Rect gameoverRect = { 330, 80, 250, 80 };
-
             SDL_RenderCopy(renderer, gameoverTexture, NULL, &gameoverRect);
+            }
+
             SDL_Rect restartRect = { 335, 300, 250, 75 };
             if (mouseOverRestartButton) {
                 SDL_SetTextureColorMod(restartTexture, 255, 255, 100);

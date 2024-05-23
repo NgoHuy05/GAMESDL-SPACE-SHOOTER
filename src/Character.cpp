@@ -11,8 +11,8 @@ private:
     int HP;
 public:
     Character(int initialX, int initialY, int initialSpeed, int screenW, int screenH)
-        : x(initialX), y(initialY), speed(initialSpeed), screenWidth(screenW), screenHeight(screenH), score(0), bestScore(0), HP(3){}
- 
+        : x(initialX), y(initialY), speed(initialSpeed), screenWidth(screenW), screenHeight(screenH), score(0), bestScore(0), HP(3) {}
+
     void moveUp() { y -= speed; }
     void moveDown() { y += speed; }
     void moveLeft() { x -= speed; }
@@ -41,31 +41,33 @@ public:
         }
         bullets = remainingBullets;
     }
-        bool isCollidingWithEnemy(const Enemy& enemy) const {
+
+    bool isCollidingWithEnemy(const Enemy& enemy) const {
         SDL_Rect characterRect = { x, y, 50, 50 };
         SDL_Rect enemyRect = { enemy.getX(), enemy.getY(), 50, 50 };
         return SDL_HasIntersection(&characterRect, &enemyRect);
+    }
+
+    bool isCollidingWithThreat(const Threat& threat) const {
+        SDL_Rect characterRect = { x, y, 50, 50 };
+        SDL_Rect threatRect = { threat.getX(), threat.getY(), 50, 50 };
+        return SDL_HasIntersection(&characterRect, &threatRect);
     }
 
     int getX() const { return x; }
     void setX(int newX) { x = newX; }
     int getY() const { return y; }
     void setY(int newY) { y = newY; }
+
     const std::vector<Bullet>& getBullets() const { return bullets; }
     int getScore() const { return score; }
-    void increaseScore(int amount) {
-        score += amount;
-    }
+    void increaseScore(int amount) { score += amount; }
     void setScore(int newScore) { score = newScore; }
     int getBestScore() const { return bestScore; }
-    void updateBestScore () {
-        if (score > bestScore) {
-            bestScore = score;
-        }
-    }
-    int getHP() const{ return HP;}
+    void setBestScore(int newBestScore) { bestScore = newBestScore; }
+    void updateBestScore() { if (score > bestScore) bestScore = score; }
+
+    int getHP() const { return HP; }
     void setHP(int newHP) { HP = newHP; }
-    void decreaseHP(int amount){
-        HP -= amount;
-    }
+    void decreaseHP(int amount) { HP -= amount; }
 };

@@ -49,6 +49,6 @@ If you want to test run this program first you have to download the necessary li
 Then to run, open Terminal (Window + R) and type cmd enter.
 Enter the command line:
 
-         ```git clone https://github.com/NgoHuy05/GAMESDL-SPACE-SHOOTER```
+         git clone https://github.com/NgoHuy05/GAMESDL-SPACE-SHOOTER
          
 Find the main.cpp file and find the triangle button, then click and the program can run or if you use code blocks press F9.

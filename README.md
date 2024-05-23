@@ -47,5 +47,5 @@ The source code for this project is licensed under the MIT license, granting use
 # Setup :
 If you want to test run this program first you have to download the necessary libraries like SDL2 SDL2_ttf SDL2_mixer SDL2_image and add these libraries to the file with main.cpp file, I can't put them on github because they are a bit heavy but I have put the link of each library to download in the library folder.
 Then to run, open Terminal (Window + R) and type cmd enter. Enter the command line:
-          git clone https://github.com/NgoHuy05/GAMESDL-SPACE-SHOOTER
+         ```git clone https://github.com/NgoHuy05/GAMESDL-SPACE-SHOOTER```
 Find the main.cpp file and find the triangle button, then click and the program can run or if you use code blocks press F9.

@@ -45,7 +45,7 @@ The source code for this project is licensed under the MIT license, granting use
 - [Pixabay](https://pixabay.com/vi/sound-effects/search/wav/) for sounds (free)
 
 # Setup :
-If you want to test run this program first you have to download the necessary libraries like SDL2 SDL2_ttf SDL2_mixer SDL2_image and add these libraries to the file with main.cpp file, I can't put them on github because they are a bit heavy but I have put the link of each library to download in the library folder.
+If you want to test run this program first you have to download the necessary libraries like ```SDL2 SDL2_ttf SDL2_mixer SDL2_image``` and add these libraries to the file with main.cpp file, I can't put them on github because they are a bit heavy but I have put the link of each library to download in the library folder.
 Then to run, open Terminal (Window + R) and type cmd enter.
 Enter the command line:
 

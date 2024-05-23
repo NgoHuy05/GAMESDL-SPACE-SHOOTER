@@ -5,18 +5,21 @@
 #include <bits/stdc++.h>
 #include "Bullet.cpp"
 #include "Enemy.cpp"
+#include "Threat.cpp"
 #include "Character.cpp"
 #include "initialize.cpp"
 #include "Menu.cpp"
 #include "Menugameover.cpp"
 #include "highscore.cpp"
+#include "Boss.cpp"
+
 
 int main(int argc, char* argv[]) {
     if (!initializeSDL()) {
         return 1;
     }
 
-    SDL_Window* window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 600, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Space Shooter create by Huyvjppro", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 600, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_Surface* backgroundSurface = IMG_Load("image/background.png");
@@ -30,6 +33,14 @@ int main(int argc, char* argv[]) {
     SDL_Surface* enemySurface = IMG_Load("image/enemy.png");
     SDL_Texture* enemyTexture = SDL_CreateTextureFromSurface(renderer, enemySurface);
     SDL_FreeSurface(enemySurface);
+
+    SDL_Surface* threatSurface = IMG_Load("image/threat.png");
+    SDL_Texture* threatTexture = SDL_CreateTextureFromSurface(renderer, threatSurface);
+    SDL_FreeSurface(threatSurface);
+
+    SDL_Surface* bossSurface = IMG_Load("image/boss.png");
+    SDL_Texture* bossTexture = SDL_CreateTextureFromSurface(renderer, bossSurface);
+    SDL_FreeSurface(bossSurface);
 
     SDL_Surface* bulletSurface = IMG_Load("image/bullet.png");
     SDL_Texture* bulletTexture = SDL_CreateTextureFromSurface(renderer, bulletSurface);
@@ -49,12 +60,15 @@ int main(int argc, char* argv[]) {
     const std::string highScoreFile = "highscore.txt";
     int bestScore = readHighScore(highScoreFile);
     Character player(50, 300, 10, 1000, 600);
+    Boss* boss = nullptr;
+
     player.setBestScore(bestScore);
     std::vector<Enemy> enemies;
-
+    std::vector<Threat> threats;
     bool isRunning = true;
     bool gameOver = false;
     bool playAgain = false;
+    bool bossSpawned = false;
 
     SDL_Event event;
     srand(time(NULL));
@@ -78,13 +92,14 @@ int main(int argc, char* argv[]) {
                 }
               }
             }
-
         if (gameOver) {
             if (showMenuOver(renderer, font, player)) {
                 Mix_PlayChannel(-1, clickSound, 0);
                 resetGame(player, enemies);
                 gameOver = false;
                 countdown(renderer, font);
+                bossSpawned = false;
+                delete boss;
             } else {
                 isRunning = false;
             }
@@ -101,10 +116,9 @@ int main(int argc, char* argv[]) {
             }
         }
         enemies = remainingEnemies;
-
         if (rand() % 250 == 0) {
             int enemyY = rand() % 550;
-            enemies.emplace_back(1000, enemyY, 2.5);
+            enemies.emplace_back(1000, enemyY, 1.5);
         }
 
         for (size_t i = 0; i < enemies.size(); ) {
@@ -176,9 +190,81 @@ int main(int argc, char* argv[]) {
             SDL_Rect bulletRect = { bullet.getX(), bullet.getY(), 50, 50 };
             SDL_RenderCopy(renderer, bulletTexture, NULL, &bulletRect);
         }
+          if (player.getScore() == 50 && !bossSpawned) {
+            boss = new Boss(880, 250, 1.5, 1000);
+            enemies.clear();
+            bossSpawned = true;
+        }
+
+if (boss) {
+    boss->move();
+    enemies.clear();
+    SDL_Rect bossRect = { boss->getX(), boss->getY(), 120, 120 };
+    SDL_RenderCopy(renderer, bossTexture, NULL, &bossRect);
+    std::string HPBOSSText = "HP BOSS: " + std::to_string(boss->getHP());
+    renderText(renderer, font, HPBOSSText, 500, 10);
+     std::vector<Threat> remainingThreats;
+
+        for (const auto& threat : threats) {
+            if (!player.isCollidingWithThreat(threat)) {
+                remainingThreats.push_back(threat);
+            } else {
+                Mix_PlayChannel(-1, explosionSound, 0);
+                player.decreaseHP(1);
+            }
+        }
+        threats = remainingThreats;
+    if (rand() % 100 == 0) {
+            int threatY = rand() % 501 + 50 ;
+            threats.emplace_back(5000, threatY, 1.5);
+        }
+    for (auto& threat : threats) {
+        threat.move();
+    }
+
+    for (size_t i = 0; i < threats.size(); ++i) {
+        for (size_t j = 0; j < player.getBullets().size(); ++j) {
+            const Bullet& bullet = player.getBullets()[j];
+            const Threat& threat = threats[i];
+            if (bullet.getX() >= threat.getX() && bullet.getX() <= threat.getX() + 100 &&
+                bullet.getY() >= threat.getY() && bullet.getY() <= threat.getY() + 100) {
+                Mix_PlayChannel(-1, explosionSound, 0);
+                std::vector<Bullet>& mutableBullets = const_cast<std::vector<Bullet>&>(player.getBullets());
+                mutableBullets.erase(mutableBullets.begin() + j);
+                threats.erase(threats.begin() + i);
+                continue;
+            }
+        }
+    }
+
+    for (const auto& threat : threats) {
+        SDL_Rect threatRect = { threat.getX(), threat.getY(), 100, 100 };
+        SDL_RenderCopy(renderer, threatTexture, NULL, &threatRect);
+    }
+
+    std::vector<Bullet>& playerBullets = const_cast<std::vector<Bullet>&>(player.getBullets());
+    for (size_t i = 0; i < playerBullets.size(); ++i) {
+        const Bullet& bullet = playerBullets[i];
+        if (bullet.getX() >= boss->getX() && bullet.getX() <= boss->getX() + 120 &&
+            bullet.getY() >= boss->getY() && bullet.getY() <= boss->getY() + 120) {
+            Mix_PlayChannel(-1, explosionSound, 0);
+            boss->decreaseHP(1);
+            playerBullets.erase(playerBullets.begin() + i);
+            break;
+        }
+    }
+    if (boss->getHP() == 0) {
+        delete boss;
+        boss = nullptr;
+        player.increaseScore(13122005);
+        bossSpawned = false;
+    }
+
+}
         SDL_RenderPresent(renderer);
         SDL_Delay(10);
     }
+    delete boss;
 
     SDL_DestroyTexture(backgroundTexture);
     SDL_DestroyTexture(characterTexture);

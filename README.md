@@ -52,3 +52,20 @@ Enter the command line:
          git clone https://github.com/NgoHuy05/GAMESDL-SPACE-SHOOTER
          
 Find the main.cpp file and find the triangle button, then click and the program can run or if you use code blocks press F9.
+
+## Spoil:
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+If you reach level 50, you will encounter an extremely difficult boss. The boss will summon countless fireballs and have 1000 HP. To defeat the boss, you must hit it with 1000 shots. Therefore, this game I created is designed to prevent anyone from winning.
+
+And if there's a winning scenario, you'll get an additional 13122005 points(it's my birthday ^^), and it will display "Congratulations! You win."
+
+```"Nah! I don't think anyone can win."```

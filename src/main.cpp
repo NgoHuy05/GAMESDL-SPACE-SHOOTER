@@ -9,12 +9,13 @@
 #include "initialize.cpp"
 #include "Menu.cpp"
 #include "Menugameover.cpp"
+#include "highscore.cpp"
 
 int main(int argc, char* argv[]) {
     if (!initializeSDL()) {
         return 1;
     }
- 
+
     SDL_Window* window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 600, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
@@ -43,10 +44,12 @@ int main(int argc, char* argv[]) {
     Mix_Chunk* clickSound = Mix_LoadWAV("sound/click.mp3");
     Mix_Chunk* shootSound = Mix_LoadWAV("sound/shoot.wav");
 
-    TTF_Font* font = loadFont("arial.ttf", 24);
+    TTF_Font* font = loadFont("image/arial.ttf", 24);
 
-
+    const std::string highScoreFile = "highscore.txt";
+    int bestScore = readHighScore(highScoreFile);
     Character player(50, 300, 10, 1000, 600);
+    player.setBestScore(bestScore);
     std::vector<Enemy> enemies;
 
     bool isRunning = true;
@@ -127,6 +130,10 @@ int main(int argc, char* argv[]) {
             }
             if(player.getHP() <= 0){
                 gameOver = true;
+                 if (player.getScore() > bestScore) {
+                    bestScore = player.getScore();
+                    writeHighScore(highScoreFile, bestScore);
+                }
                  continue;
             }
             if (gameOver) {
@@ -135,6 +142,7 @@ int main(int argc, char* argv[]) {
                 continue;
             }
 }
+
 
         SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);

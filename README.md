@@ -27,10 +27,10 @@ Enemy Dynamics: Enemies dynamically move against the character and spawn randoml
 - Font Styling: Utilize custom fonts to enrich the visual presentation and enhance readability.
 
 # Third party tools :
-- [SDL2-devel-2.29.2-mingw.zip](https://github.com/libsdlorg/SDL/releases/tag/prerelease-2.29.2) to handle all the low-level stuff
-- [SDL2_image-devel-2.8.2-mingw.zip](https://github.com/libsdlorg/SDL_image/releases/tag/release-2.8.2) for loading images
+- [SDL2-devel-2.29.2-mingw.zip](https://github.com/libsdl-org/SDL/releases/tag/prerelease-2.29.2) to handle all the low-level stuff
+- [SDL2_image-devel-2.8.2-mingw.zip](https://github.com/libsdl-org/SDL_image/releases/tag/release-2.8.2) for loading images
 - [SDL2_ttf-devel-2.22.0-mingw.zip](https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.22.0) for loading fonts
-- [SDL2_mixer-devel-2.8.0-mingw.zip](https://github.com/libsdlorg/SDL_image/releases/tag/release-2.8.2) for loading sounds
+- [SDL2_mixer-devel-2.8.0-mingw.zip](https://github.com/libsdl-org/SDL_mixer/releases/tag/release-2.8.0) for loading sounds
 
 # Acknowledgements :
 - [Lazy Foo's SDL tutorials](https://lazyfoo.net/tutorials/SDL/index.php) have been incredibly valuable, especially if you're delving into low-level game programming or seeking a robust framework to manage fundamental graphics for your C/C++ projects.

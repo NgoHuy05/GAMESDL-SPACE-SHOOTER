@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
             }
         }
         enemies = remainingEnemies;
-        if (rand() % 250 == 0) {
+        if (rand() % 150 == 0) {
             int enemyY = rand() % 550;
             enemies.emplace_back(1000, enemyY, 1.5);
         }
@@ -143,7 +143,7 @@ int main(int argc, char* argv[]) {
             } else {
                 ++i;
             }
-            if(player.getHP() <= 0){
+            if(player.getHP() == 0){
                 gameOver = true;
                  if (player.getScore() > bestScore) {
                     bestScore = player.getScore();
@@ -191,6 +191,7 @@ int main(int argc, char* argv[]) {
             SDL_Rect bulletRect = { bullet.getX(), bullet.getY(), 50, 50 };
             SDL_RenderCopy(renderer, bulletTexture, NULL, &bulletRect);
         }
+
         std::vector<Threat> remainingThreats;
         for (const auto& threat : threats) {
             if (!player.isCollidingWithThreat(threat)) {
@@ -202,12 +203,12 @@ int main(int argc, char* argv[]) {
         }
         threats = remainingThreats;
 
-        if (rand() % 100 == 0) { 
+        if (rand() % 100 == 0) {
             int threatY = rand() % 550;
-            threats.emplace_back(1000, threatY, 3);
+            threats.emplace_back(1000, threatY, 3.5);
 }
 
-        if (player.getScore() == 5 && !bossSpawned) {
+        if (player.getScore() == 25 && !bossSpawned) {
             boss = new Boss(880, 250, 1.5, 1000);
             enemies.clear();
             bossSpawned = true;
@@ -235,8 +236,7 @@ int main(int argc, char* argv[]) {
                 Mix_PlayChannel(-1, explosionSound, 0);
                 std::vector<Bullet>& mutableBullets = const_cast<std::vector<Bullet>&>(player.getBullets());
                 mutableBullets.erase(mutableBullets.begin() + j);
-                threats.erase(threats.begin() + i);
-                continue;
+                break;
             }
         }
     }

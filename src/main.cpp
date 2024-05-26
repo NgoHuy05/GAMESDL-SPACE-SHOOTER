@@ -65,6 +65,7 @@ int main(int argc, char* argv[]) {
     player.setBestScore(bestScore);
     std::vector<Enemy> enemies;
     std::vector<Threat> threats;
+
     bool isRunning = true;
     bool gameOver = false;
     bool playAgain = false;
@@ -190,21 +191,7 @@ int main(int argc, char* argv[]) {
             SDL_Rect bulletRect = { bullet.getX(), bullet.getY(), 50, 50 };
             SDL_RenderCopy(renderer, bulletTexture, NULL, &bulletRect);
         }
-          if (player.getScore() == 50 && !bossSpawned) {
-            boss = new Boss(880, 250, 1.5, 1000);
-            enemies.clear();
-            bossSpawned = true;
-        }
-
-if (boss) {
-    boss->move();
-    enemies.clear();
-    SDL_Rect bossRect = { boss->getX(), boss->getY(), 120, 120 };
-    SDL_RenderCopy(renderer, bossTexture, NULL, &bossRect);
-    std::string HPBOSSText = "HP BOSS: " + std::to_string(boss->getHP());
-    renderText(renderer, font, HPBOSSText, 500, 10);
-     std::vector<Threat> remainingThreats;
-
+        std::vector<Threat> remainingThreats;
         for (const auto& threat : threats) {
             if (!player.isCollidingWithThreat(threat)) {
                 remainingThreats.push_back(threat);
@@ -214,13 +201,30 @@ if (boss) {
             }
         }
         threats = remainingThreats;
-    if (rand() % 100 == 0) {
-            int threatY = rand() % 501 + 50 ;
-            threats.emplace_back(5000, threatY, 1.5);
+
+        if (rand() % 100 == 0) { 
+            int threatY = rand() % 550;
+            threats.emplace_back(1000, threatY, 3);
+}
+
+        if (player.getScore() == 5 && !bossSpawned) {
+            boss = new Boss(880, 250, 1.5, 1000);
+            enemies.clear();
+            bossSpawned = true;
+
+
         }
-    for (auto& threat : threats) {
-        threat.move();
-    }
+
+    if (boss) {
+        boss->move();
+        enemies.clear();
+        for (auto& threat : threats) {
+            threat.move();
+        }
+        SDL_Rect bossRect = { boss->getX(), boss->getY(), 120, 120 };
+        SDL_RenderCopy(renderer, bossTexture, NULL, &bossRect);
+        std::string HPBOSSText = "HP BOSS: " + std::to_string(boss->getHP());
+        renderText(renderer, font, HPBOSSText, 500, 10);
 
     for (size_t i = 0; i < threats.size(); ++i) {
         for (size_t j = 0; j < player.getBullets().size(); ++j) {
@@ -236,12 +240,6 @@ if (boss) {
             }
         }
     }
-
-    for (const auto& threat : threats) {
-        SDL_Rect threatRect = { threat.getX(), threat.getY(), 100, 100 };
-        SDL_RenderCopy(renderer, threatTexture, NULL, &threatRect);
-    }
-
     std::vector<Bullet>& playerBullets = const_cast<std::vector<Bullet>&>(player.getBullets());
     for (size_t i = 0; i < playerBullets.size(); ++i) {
         const Bullet& bullet = playerBullets[i];
@@ -261,6 +259,10 @@ if (boss) {
     }
 
 }
+        for (const auto& threat : threats) {
+        SDL_Rect threatRect = { threat.getX(), threat.getY(), 100, 100 };
+        SDL_RenderCopy(renderer, threatTexture, NULL, &threatRect);
+    }
         SDL_RenderPresent(renderer);
         SDL_Delay(10);
     }
@@ -271,6 +273,7 @@ if (boss) {
     SDL_DestroyTexture(enemyTexture);
     SDL_DestroyTexture(bulletTexture);
     SDL_DestroyTexture(HPTexture);
+    SDL_DestroyTexture(threatTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     Mix_CloseAudio();

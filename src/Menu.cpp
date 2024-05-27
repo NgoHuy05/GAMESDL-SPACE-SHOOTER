@@ -81,6 +81,7 @@ bool showMenu(SDL_Renderer* renderer, TTF_Font* font) {
             renderText(renderer, font, "Flying left  : LEFT", 500, 100);
             renderText(renderer, font, "Flying right : RIGHT", 500, 150);
             renderText(renderer, font, "SHOOT: SPACE", 100, 200);
+            renderText(renderer, font, "PAUSE: ENTER", 500, 200);
             renderText(renderer, font, "If you let the enemy cross the boundary, you will lose 1 HP", 100, 400);
             renderText(renderer, font, "If you collide with the enemy, you will lose 1 HP", 100, 450);
             renderText(renderer, font, "If you run out of HP, you will lose", 100, 500);

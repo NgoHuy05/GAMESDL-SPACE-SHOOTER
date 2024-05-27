@@ -75,7 +75,6 @@ int main(int argc, char* argv[]) {
     srand(time(NULL));
 
     showMenu(renderer, font);
-    countdown(renderer, font);
 
     while (isRunning ) {
         while (SDL_PollEvent(&event)) {
@@ -87,9 +86,8 @@ int main(int argc, char* argv[]) {
                     case SDLK_DOWN: player.moveDown(); break;
                     case SDLK_LEFT: player.moveLeft(); break;
                     case SDLK_RIGHT: player.moveRight(); break;
-                    case SDLK_SPACE: player.shoot();
-                    Mix_PlayChannel(-1, shootSound, 0);
-                    break;
+                    case SDLK_SPACE: player.shoot();  Mix_PlayChannel(-1, shootSound, 0); break;
+                    case SDLK_RETURN: showPauseMenu(renderer,font); Mix_PlayChannel(-1, clickSound, 0); break;
                 }
               }
             }
@@ -98,7 +96,6 @@ int main(int argc, char* argv[]) {
                 Mix_PlayChannel(-1, clickSound, 0);
                 resetGame(player, enemies);
                 gameOver = false;
-                countdown(renderer, font);
                 bossSpawned = false;
                 delete boss;
             } else {

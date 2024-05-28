@@ -6,12 +6,13 @@
 #include "Bullet.cpp"
 #include "Enemy.cpp"
 #include "Threat.cpp"
+#include "Boss.cpp"
 #include "Character.cpp"
 #include "initialize.cpp"
 #include "Menu.cpp"
 #include "Menugameover.cpp"
 #include "highscore.cpp"
-#include "Boss.cpp"
+
 
 
 int main(int argc, char* argv[]) {
@@ -94,13 +95,15 @@ int main(int argc, char* argv[]) {
         if (gameOver) {
             if (showMenuOver(renderer, font, player)) {
                 Mix_PlayChannel(-1, clickSound, 0);
-                resetGame(player, enemies);
+                resetGame(player, enemies, threats, boss);
                 gameOver = false;
                 bossSpawned = false;
                 delete boss;
+                boss = nullptr;
             } else {
                 isRunning = false;
             }
+            continue;
         }
         player.updatePosition();
         std::vector<Enemy> remainingEnemies;
@@ -189,6 +192,19 @@ int main(int argc, char* argv[]) {
             SDL_RenderCopy(renderer, bulletTexture, NULL, &bulletRect);
         }
 
+
+
+        if (player.getScore() == 20 && !bossSpawned) {
+            boss = new Boss(880, 250, 1.5, 1000);
+            enemies.clear();
+            bossSpawned = true;
+
+
+        }
+
+    if (boss) {
+        boss->move();
+        enemies.clear();
         std::vector<Threat> remainingThreats;
         for (const auto& threat : threats) {
             if (!player.isCollidingWithThreat(threat)) {
@@ -200,22 +216,10 @@ int main(int argc, char* argv[]) {
         }
         threats = remainingThreats;
 
-        if (rand() % 100 == 0) {
+        if (rand() % 80 == 0) {
             int threatY = rand() % 550;
-            threats.emplace_back(1000, threatY, 3.5);
+            threats.emplace_back(1000, threatY, 5);
 }
-
-        if (player.getScore() == 25 && !bossSpawned) {
-            boss = new Boss(880, 250, 1.5, 1000);
-            enemies.clear();
-            bossSpawned = true;
-
-
-        }
-
-    if (boss) {
-        boss->move();
-        enemies.clear();
         for (auto& threat : threats) {
             threat.move();
         }
@@ -228,8 +232,8 @@ int main(int argc, char* argv[]) {
         for (size_t j = 0; j < player.getBullets().size(); ++j) {
             const Bullet& bullet = player.getBullets()[j];
             const Threat& threat = threats[i];
-            if (bullet.getX() >= threat.getX() && bullet.getX() <= threat.getX() + 100 &&
-                bullet.getY() >= threat.getY() && bullet.getY() <= threat.getY() + 100) {
+            if (bullet.getX() >= threat.getX() && bullet.getX() <= threat.getX() + 80 &&
+                bullet.getY() >= threat.getY() && bullet.getY() <= threat.getY() + 80) {
                 Mix_PlayChannel(-1, explosionSound, 0);
                 std::vector<Bullet>& mutableBullets = const_cast<std::vector<Bullet>&>(player.getBullets());
                 mutableBullets.erase(mutableBullets.begin() + j);
@@ -248,7 +252,7 @@ int main(int argc, char* argv[]) {
             break;
         }
     }
-    if (boss->getHP() == 0) {
+    if (boss->getHP() <= 0) {
         delete boss;
         boss = nullptr;
         player.increaseScore(13122005);
@@ -257,7 +261,7 @@ int main(int argc, char* argv[]) {
 
 }
         for (const auto& threat : threats) {
-        SDL_Rect threatRect = { threat.getX(), threat.getY(), 100, 100 };
+        SDL_Rect threatRect = { threat.getX(), threat.getY(), 80, 80 };
         SDL_RenderCopy(renderer, threatTexture, NULL, &threatRect);
     }
         SDL_RenderPresent(renderer);

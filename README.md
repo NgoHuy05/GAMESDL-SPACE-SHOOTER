@@ -9,7 +9,7 @@ K68N - UET - 2324II_INT2215_21 - Lap trinh nang cao
 Welcome to Space-shooter, a thrilling arcade-style game where you pilot a spaceship and battle against waves of enemies in space. This game is developed entirely in C++ utilizing the powerful SDL2 library, providing rich graphics and immersive sound effects.
 
 ## Gallery :
-[review](https://www.youtube.com/watch?v=qLMXA-Sd898)
+[review - youtube](https://www.youtube.com/watch?v=qLMXA-Sd898)
 ![image](https://github.com/NgoHuy05/Space-shooter---gameSDL/assets/160807769/2841febd-90c9-4a9d-836f-40f68be95505)
 ![image](https://github.com/NgoHuy05/Space-shooter---gameSDL/assets/160807769/cc087d70-f9ee-4909-805c-b50ee5e2adfd)
 ![image](https://github.com/NgoHuy05/GAMESDL-SPACE-SHOOTER/assets/160807769/25269135-3088-4d47-81f1-8c12271f9349)

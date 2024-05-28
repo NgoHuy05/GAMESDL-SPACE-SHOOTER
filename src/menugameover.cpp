@@ -1,9 +1,12 @@
-void resetGame(Character& player, std::vector<Enemy>& enemies) {
+void resetGame(Character& player, std::vector<Enemy>& enemies, std::vector<Threat>& threats, Boss*& boss) {
     player.setX(50);
     player.setY(300);
     player.setScore(0);
     player.setHP(3);
     enemies.clear();
+    threats.clear();
+    delete boss;
+    boss = nullptr;
 }
 
 bool showMenuOver(SDL_Renderer* renderer, TTF_Font* font,  Character& player) {

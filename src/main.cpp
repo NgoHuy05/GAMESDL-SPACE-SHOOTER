@@ -233,7 +233,7 @@ int main(int argc, char* argv[]) {
             const Bullet& bullet = player.getBullets()[j];
             const Threat& threat = threats[i];
             if (bullet.getX() >= threat.getX() && bullet.getX() <= threat.getX() + 80 &&
-                bullet.getY() >= threat.getY() && bullet.getY() <= threat.getY() + 80) {
+                bullet.getY() >= threat.getY() && bullet.getY() - 40 <= threat.getY() + 80) {
                 Mix_PlayChannel(-1, explosionSound, 0);
                 std::vector<Bullet>& mutableBullets = const_cast<std::vector<Bullet>&>(player.getBullets());
                 mutableBullets.erase(mutableBullets.begin() + j);

@@ -194,7 +194,7 @@ int main(int argc, char* argv[]) {
 
 
 
-        if (player.getScore() == 20 && !bossSpawned) {
+        if (player.getScore() == 25 && !bossSpawned) {
             boss = new Boss(880, 250, 1.5, 1000);
             enemies.clear();
             bossSpawned = true;
@@ -275,6 +275,7 @@ int main(int argc, char* argv[]) {
     SDL_DestroyTexture(bulletTexture);
     SDL_DestroyTexture(HPTexture);
     SDL_DestroyTexture(threatTexture);
+    SDL_DestroyTexture(bossTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     Mix_CloseAudio();

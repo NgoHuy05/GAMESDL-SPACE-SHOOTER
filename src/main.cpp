@@ -257,6 +257,8 @@ int main(int argc, char* argv[]) {
         boss = nullptr;
         player.increaseScore(13122005);
         bossSpawned = false;
+        threats.clear();
+        showMenuOver(renderer, font, player);
     }
 
 }
